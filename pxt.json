@@ -1,0 +1,21 @@
+{
+    "name": "pxt-MakerBit-ESP12",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "serial-read": "github:philipphenkel/pxt-serial-read#v0.1.0"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "blocksprj"
+}
