@@ -80,6 +80,7 @@ enum espDigitalPin {
     D7,
     D8
 }
+//% weight=100 color=#e08f02
 namespace EspCompanion {
 
     /**
