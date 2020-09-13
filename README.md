@@ -1,9 +1,12 @@
-
 > Open this page at [https://iowadave.github.io/pxt-makerbit-esp12/](https://iowadave.github.io/pxt-makerbit-esp12/)
 
 ## Use as Extension
 
 This repository can be added as an **extension** in MakeCode.
+
+Note: it is designed to communicate via serial with custom firmware installed on an Expressif 8266 microcontroller, in particular the models ESP-12E or -12F, mounted on a development module such as a NodeMCU or Wemos (Lolin) design.
+
+You will need to install the firmware on the 8266 separately. It can be found on github at [https://github.com/IowaDave/8266-Firmware-for-MakerBit/settings](https://github.com/IowaDave/8266-Firmware-for-MakerBit/settings).
 
 * open [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * click on **New Project**
