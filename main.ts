@@ -304,7 +304,7 @@ namespace EspCompanion {
     /**
      * Send the ESP-device an AT-command to initialize the LCD
      */
-    //% blockID="init_LCD" block="activate LCD"
+    //% blockID="init_LCD" block="activate ESP LCD"
     export function initLCD(): void {
         serial.writeString("AT+LCDI~");      
     }
@@ -312,7 +312,7 @@ namespace EspCompanion {
     /**
      * Send the ESP-device an AT-command to clear the LCD
      */
-    //% blockID="clear_LCD" block="clear LCD"
+    //% blockID="clear_LCD" block="clear ESP LCD"
     export function clearLCD(): void {
         serial.writeString("AT+LCDCLR~");      
     }
@@ -320,7 +320,7 @@ namespace EspCompanion {
     /**
      * Send the ESP-device an AT-command to set the LCD address
      */
-    //% blockID="address_LCD" block="set LCD address to %i2caddress"
+    //% blockID="address_LCD" block="set ESP LCD address to %i2caddress"
     export function addressLCD(i2caddress: number): void {
         serial.writeString("AT+LCDA=" + i2caddress + "~");      
     }
@@ -328,7 +328,7 @@ namespace EspCompanion {
     /**
      * Send the ESP-device AT-commands to print to the LCD
      */
-    //% blockID="print_LCD" block="print %lcdText on LCD at row %lcdRow column %lcdCol"
+    //% blockID="print_LCD" block="print %lcdText on ESP LCD at row %lcdRow column %lcdCol"
     //% lcdRow.min=0 lcdRow.max=1 lcdRow.defl=0
     //% lcdCol.min=0 lcdCol.max=15 lcdCol.defl=0
     export function printLCD(lcdText: string, lcdRow: number, lcdCol: number  ): void {
