@@ -1,16 +1,74 @@
 /**
+ * pull next serial byte into _byteWaiting
+ * return true if the byte expresses a utf-8 ASCII character 
+ * side effect: the byte is no longer in the serial Rx buffer
+ * rather, it is now in the _byteWaiting container
+ */
+function serialMessageWaiting () {
+    _byteWaiting = serial.read();
+    if (_byteWaiting > 31 && _byteWaiting < 127) {
+        return true
+    }
+    return false
+}
+
+/**
+ * evaluate the byte in the _byteWaiting container 
+ * append it to the return string if it is a utf-8 ASCII value 
+ * exit when a tilde (0x7e = 126) is encountered,
+ * as that is the string delimiter used by the 8266 firmware
+ */
+function readStringFromSerial () {
+    receivedString = ""
+    while (_byteWaiting > 0 && _byteWaiting < 127) {
+        if (_byteWaiting == 126) {
+            _byteWaiting = 0
+            return receivedString
+        }
+        receivedString = receivedString.concat(String.fromCharCode(_byteWaiting));
+        // we don't want to block 
+        basic.pause(1)
+        _byteWaiting = serial.read();
+    }
+    // return 'NA' if a byte <= 0 or byte > 126 is encountered
+    return "NA"
+}
+
+/**
+ * A timeout function for serial input 
+ * returns true if a utf-8 ASCII byte is obtained 
+ * from the serial Rx buffer 
+ * within the time allowed by the function parameter. 
+ * Side effect (from serialMessageWaiting() function): 
+ * the byte obtained is no longer in the serial Rx Buffer,
+ * rather, it is in the _byteWaiting container.
+ */
+function espRespondsWithinMilliseconds (timeAllowed: number) {
+    functionStartTime = input.runningTime()
+    while (input.runningTime() - functionStartTime < timeAllowed) {
+        if (serialMessageWaiting()) {
+            return true
+        }
+        // we don't want to block 
+        basic.pause(1)
+    }
+    return false
+}
+
+/**
  * Custom functions and blocks for MakerBitX ESP extension board.
+ * 
  * David "IowaDave" Sparks  September 9, 2020
  */
-
-let _8266MessageWaiting = false;
-let _byteWaiting = 0;
-
+let functionStartTime = 0
+let theAnswer = false
+let receivedString = ""
+let _8266MessageWaiting = false
+let _byteWaiting = 0
 enum espLowHigh {
     LOW,
     HIGH
 }
-
 enum espDigitalPin {
     D0,
     D1,
@@ -22,51 +80,6 @@ enum espDigitalPin {
     D7,
     D8
 }
-
-
-function serialMessageWaiting(): boolean {
-    let theAnswer = false;
-    _byteWaiting = serial.read();
-    if ((_byteWaiting > 31) && (_byteWaiting < 127)) {
-        theAnswer = true;
-    }
-    return theAnswer;
-}
-
-/* I think this call to built-in MakeCode event handler is obsolete
-serial.onDataReceived("~", function () {
-    _8266MessageWaiting = true;
-})
-*/
-
-function espRespondsWithinMilliseconds (timeAllowed: number): boolean {
-    let functionStartTime = input.runningTime();
-    while (input.runningTime() - functionStartTime < timeAllowed) {
-        if (serialMessageWaiting()) {
-            return true;
-        }
-        basic.pause(1);
-    }
-    return false;
-}
-
-function readStringFromSerial (): string {
-    let receivedString = "";
-    while ((_byteWaiting > 0) && (_byteWaiting < 127) ) {
-        if (_byteWaiting == 126) { 
-            _byteWaiting = 0;
-            return receivedString; } 
-        receivedString = receivedString.concat(String.fromCharCode(_byteWaiting));
-        _byteWaiting = serial.read();
-    }
-    //return receivedString;
-    return "NA";
-}
-
-/**
- * Custom blocks
- */
-//% weight=100 color=#0fbc11 icon=""
 namespace EspCompanion {
 
     /**
@@ -272,16 +285,16 @@ namespace EspCompanion {
             default:
                 // no operation 
         }
-        let returnedValue = -1;
+        let returnedValue2 = -1;
         if (espRespondsWithinMilliseconds(1000)) {
-            returnedValue = -2;
-            let analogString = readStringFromSerial();
-            if ((analogString.indexOf("PWM") == 0) 
-                && (analogString.indexOf("=") == 4)) {
-                returnedValue = parseInt(analogString.slice(5));
+            returnedValue2 = -2;
+            let analogString2 = readStringFromSerial();
+            if ((analogString2.indexOf("PWM") == 0) 
+                && (analogString2.indexOf("=") == 4)) {
+                returnedValue2 = parseInt(analogString2.slice(5));
             }
         }
-        return returnedValue;
+        return returnedValue2;
     }
 
 
