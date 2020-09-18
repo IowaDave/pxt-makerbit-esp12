@@ -1,32 +1,23 @@
 > Open this page at [https://iowadave.github.io/pxt-makerbit-esp12/](https://iowadave.github.io/pxt-makerbit-esp12/)
 
-## Use as Extension
+## For Use as a MakeCode Extension
 
 This repository can be added as an **extension** in MakeCode.
-
-Note: it is designed to communicate via serial with custom firmware installed on an Expressif 8266 microcontroller, in particular the models ESP-12E or -12F, mounted on a development module such as a NodeMCU or Wemos (Lolin) design.
-
-You will need to install the firmware on the 8266 separately. It can be found on github at [https://github.com/IowaDave/8266-Firmware-for-MakerBit](https://github.com/IowaDave/8266-Firmware-for-MakerBit).
 
 * open [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * click on **New Project**
 * click on **Extensions** under the gearwheel menu
 * search for **https://github.com/iowadave/pxt-makerbit-esp12** and import
 
-## Edit this project ![Build status badge](https://github.com/iowadave/pxt-makerbit-esp12/workflows/MakeCode/badge.svg)
+## Interact with an 8266 Model ESP-12E or ESP-12F microcontroller
 
-To edit this repository in MakeCode.
+Note: The blocks and functions defined in this code are designed to communicate via serial with custom firmware installed on an Expressif 8266 microcontroller, in particular the models ESP-12E or -12F, mounted on a development module such as a NodeMCU or Wemos (Lolin) design.
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/iowadave/pxt-makerbit-esp12** and click import
+You will need to install suitable firmware on the 8266 separately. An example can be found on github at [https://github.com/IowaDave/8266-Firmware-for-MakerBit](https://github.com/IowaDave/8266-Firmware-for-MakerBit).
 
-## Blocks preview
+## About the Blocks
 
-This image shows the blocks code from the last commit in master.
-This image may take a few minutes to refresh.
 
-![A rendered view of the blocks](https://github.com/iowadave/pxt-makerbit-esp12/raw/master/.github/makecode/blocks.png)
 
 #### Metadata (used for search, rendering)
 
