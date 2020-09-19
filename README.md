@@ -1,4 +1,4 @@
-> Open this page at [https://iowadave.github.io/pxt-makerbit-esp12/](https://iowadave.github.io/pxt-makerbit-esp12/)
+#Custom Blocks for an 8266-based Companion Board
 
 ## For Use as a MakeCode Extension
 
