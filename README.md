@@ -79,13 +79,17 @@ Figure 4 shows an example of using a block to set the value of digital pin D5 to
 
 [Figure 4]
 
+**About Digital Pin Values**
+
+In the digital world everything is a number. Words such as "HIGH" and "LOW" have meaning only as names for numers. The blocks in this Extension package *translate* the word HIGH into the number 1, and the word LOW into the number 0.
+
 #### Read the value of a digital pin
 
 Figure 5 shows an example of using a block to obtain the value of digital pin D5 and then to display it on the micro:bit's LED panel. 
 
 This block is an oval-shaped "reporter" block that returns the value as a number. It can be used anywhere that a numeric variable would be expected. In this example, it is used in the basic "show number" block.
 
-The number will be "1" when the pin is set to HIGH. It will be "0" (zero) when the pin is set to LOW. Reading the value of a pin does not change its value.
+The number will be 1 when the pin is set to HIGH. It will be 0 (zero) when the pin is set to LOW. Reading the value of a pin does not change its value.
 
 Again, the block features a drop-down list of the digital pins on the ESP-12E or ESP-12F module.
 
