@@ -1,4 +1,4 @@
-#Custom Blocks for an 8266-based Companion Board
+# Custom Blocks for an 8266-based Companion Board
 
 ## For Use as a MakeCode Extension
 
