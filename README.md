@@ -117,24 +117,73 @@ Watch out! Some ESP-12-type modules can tolerate a maximum of only 1 volt on pin
 
 ### The Pulse Wave Modulation (PWM) Blocks
 
-Pulse wave modulation is a digital technique that works like a dimmer switch or a motor speed control. The 8266 can perform PWM on all of its digital pins. Figure 8 shows the blocks for setting the PWM level of a digital pin.
+Pulse wave modulation is a digital technique that gives results similar to a dimmer switch or a motor speed control. The 8266 can perform PWM on all of its digital pins. Figure 8 shows the blocks for setting the PWM level of a digital pin.
 
 ![PWM Blocks](https://raw.githubusercontent.com/IowaDave/pxt-makerbit-esp12/master/images/PWMblocks.png)
 
 [Figure 8]
 
-This article does not try to explain how PWM works. The Web crawls with tutorials and articles about PWM.
+This article does not try to explain how PWM works. The Web crawls with tutorials and articles about PWM. The example that follows might "illuminate" the topic.
 
-#### Use PWM to Dim an LED
+#### Use PWM to Dim and Brighten an LED
 
 The firmware we wrote to work with these blocks adjusts the 8266 so that its PWM levels range between 0 = "off" and 100 = "fully on". That is why the block to set a PWM value accepts a number in the range of 0 to 100.
 
-Figure 9 illustrates a short sketch to dim an brighten an LED.
+Figure 9 illustrates a short sketch to dim and brighten an LED connected to digital pin D5 on an 8266 Companion Board.
 
- ![PWM Dimmer Sketch](https://raw.githubusercontent.com/IowaDave/pxt-makerbit-esp12/master/images/Dimmer.png)
+![PWM Dimmer Sketch](https://raw.githubusercontent.com/IowaDave/pxt-makerbit-esp12/master/images/Dimmer.png)
 
 [Figure 9]
 
+### The Liquid Crystal Display (LCD) Blocks
+
+This group of blocks remained experimental at the time of writing. Please keep in mind that the MakerBit also supports I2C LCD devices. If these blocks do not satisfy you, then please consider using your LCD device with the MakerBit instead.
+
+These blocks for the 8266 Companion Board support only LCD devices that have 16 character positions on each of two rows, which we may refer to as the 1602 format, and that connect via the I2C protocol. Adding support for the 2004 format devices (4 rows having 20 characters each) is a priority for future development.
+
+Figure 10 illustrates the four blocks in the LCD group. You can try running it as a demonstration, too.
+
+![LCD blocks](https://raw.githubusercontent.com/IowaDave/pxt-makerbit-esp12/master/images/LCD.png)
+
+[Figure 10]
+
+#### set ESP LCD address
+
+![Set LCD I2C address](https://raw.githubusercontent.com/IowaDave/pxt-makerbit-esp12/master/images/setLCDaddress.png)
+
+This block tells the 8266 where to look on the I2C "bus" to locate the LCD device. 39 is a good first guess. If that does not work, try 63.
+
+Send this command before you send the next one to actually initialize the LCD device.
+
+**A Brief Introduction to I2C Addresses**
+
+The I2C protocol permits many devices to share one physical connection. Devices must have a unique "address", which is a number between 0 and 255. The manufacturer puts that number into the device. You need to know it. Here is the good news: many LCD displays of the 1602 variety use either 39 or 63 as their I2C address.
+
+It is beyond the scope of this article to go any farther into the details about the I2C protocol or I2C device addresses. Sorry, that's a subject worthy of a good search engine and a long afternoon with nothing better to do.
+
+#### activate LCD
+
+![Set LCD I2C address](https://raw.githubusercontent.com/IowaDave/pxt-makerbit-esp12/master/images/ActivateLCD.png)
+
+
+This block creates an "object" in the 8266 representing the LCD device having the I2C address given in the previous command. Send this command before you try to interact with the LCD display.
+
+#### clear LCD
+
+![Set LCD I2C address](https://raw.githubusercontent.com/IowaDave/pxt-makerbit-esp12/master/images/ClearLCD.png)
+
+This block "erases" any characters visible on the LCD display and leaves the display empty.
+
+#### print to the LCD
+
+![Set LCD I2C address](https://raw.githubusercontent.com/IowaDave/pxt-makerbit-esp12/master/images/PrintLCD.png)
+
+The image above illustrates commanding the 8266 Companion Board to display text, "Hello World" on the top row (row zero) beginning in the left-hand position (column zero).
+
+Count the characters in the text you send for display, to be sure they will not run past the right-hand position of the row (column 15). This article does not attempt to predict what might happen if you send characters off into the void that way.
+
+---
+___
 
 
 #### Metadata (used for search, rendering)
